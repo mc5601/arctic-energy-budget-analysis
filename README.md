@@ -1,94 +1,41 @@
 # Arctic Energy Budget Analysis
 
-Analysis of Arctic Top-of-Atmosphere (TOA) energy fluxes and ocean heat uptake using satellite and reanalysis data.
+Analysis of the **Arctic energy budget** using **satellite (CERES)**, **reanalysis (ERA5)**, and **ocean reanalysis (ORAS5)** data.  
+The repository is organized as three notebooks (CERES, ERA5, NETFLUX) plus small helper modules used to compute annual series and save plots.
 
-## 📊 Project Overview
+---
 
-This repository contains analyses of Arctic energy budget components:
+## What’s in here
 
-- **CERES**: Top-of-Atmosphere radiative fluxes from CERES EBAF satellite data
-- **ERA5**: Atmospheric energy fluxes from ERA5 reanalysis  
-- **NETFLUX**: Net energy flux synthesis combining multiple data sources
+- **CERES** (`ceres/Arctic_TOA_Flux_Analysis.ipynb`)  
+  Top-of-Atmosphere (TOA) radiative fluxes (shortwave, longwave, net) over the Arctic.
 
-## 📁 Repository Structure
-```
+- **ERA5** (`era5/Arctic_ERA5_Analysis.ipynb`)  
+  Atmospheric energy flux diagnostics and time tendencies over the Arctic.
+
+- **NETFLUX** (`netflux/net_flux-annual.ipynb`)  
+  Annual synthesis combining CERES + ERA5 + ORAS5 components (energy budget closure / net flux + ocean heat uptake).
+
+---
+
+## Repository structure
+
+```text
 arctic-energy-budget-analysis/
-├── ceres/                    # CERES TOA flux analysis
+├── ceres/
 │   ├── Arctic_TOA_Flux_Analysis.ipynb
-│   └── *.png                 # Visualization outputs
-├── era5/                     # ERA5 atmospheric energy analysis
+│   └── CERES_EBAF-TOA_Ed4.2.1_Subset_200003-202502.nc   (NOT tracked; can be a symlink)
+├── era5/
 │   ├── Arctic_ERA5_Analysis.ipynb
-│   └── *.png
-├── netflux/                  # Net flux synthesis
+│   └── ERA5_energy_200001-202504.nc                     (NOT tracked; can be a symlink)
+├── netflux/
 │   ├── net_flux-annual.ipynb
-│   └── plots/
-└── results/                  # Combined results
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-```bash
-python >= 3.8
-numpy
-pandas
-xarray
-matplotlib
-cartopy
-```
-
-### Installation
-```bash
-git clone https://github.com/mc5601/arctic-energy-budget-analysis.git
-cd arctic-energy-budget-analysis
-pip install -r requirements.txt
-```
-
-### Data Access
-
-**CERES EBAF data**: Download from [NASA CERES](https://ceres.larc.nasa.gov/)  
-**ERA5 data**: Download from [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/)
-
-Place downloaded `.nc` files in respective directories or update notebook paths.
-
-## 📓 Notebooks
-
-1. **CERES Analysis** (`ceres/Arctic_TOA_Flux_Analysis.ipynb`)
-   - Analyzes TOA shortwave and longwave fluxes
-   - Seasonal and annual trends
-   - Arctic amplification signals
-
-2. **ERA5 Analysis** (`era5/Arctic_ERA5_Analysis.ipynb`)  
-   - Atmospheric energy transport
-   - dE/dt calculations
-   - Energy flux convergence
-
-3. **Net Flux** (`netflux/net_flux-annual.ipynb`)
-   - Multi-dataset synthesis
-   - Annual mean energy budgets
-
-## 📈 Key Results
-
-All visualization outputs are included in respective directories. Key findings include Arctic TOA flux trends and energy budget closure analysis.
-
-## 🔬 Methods
-
-- Spatial averaging over Arctic domain (>60°N)
-- Seasonal decomposition (DJF, JJA)
-- Trend analysis (2000-2024)
-
-## 📚 Citation
-
-If you use this code or analysis, please cite:
-```
-Celedón, M. (2024). Arctic Energy Budget Analysis. 
-GitHub: https://github.com/mc5601/arctic-energy-budget-analysis
-```
-
-## 📧 Contact
-
-For questions or collaborations: mc5601@columbia.edu
-
-## 📄 License
-
-MIT License - feel free to use and modify with attribution.
+│   └── plots/                                           (optional; some runs may write here)
+├── models/                                              (helper modules used by netflux)
+│   ├── __init__.py
+│   ├── era_annual.py
+│   ├── ceres_ebaf_annual.py
+│   └── ora5_annual.py
+├── plots/                                               (saved figures for README / outputs)
+├── requirements.txt
+└── README.md
